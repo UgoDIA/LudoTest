@@ -76,7 +76,7 @@ WSGI_APPLICATION = 'ludotest.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'djangoTest',
+        'NAME': 'ludotest',
         'USER': 'postgres',
         'PASSWORD':"0000",
         'HOST': 'localhost',
