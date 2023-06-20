@@ -1,12 +1,10 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 
+
 def valider_positif(value):
     if value <= 0:
         raise ValidationError("Doit être positif")
-    
-
-    
     
 
 class Editeur(models.Model):
@@ -25,6 +23,15 @@ class Jeu(models.Model):
     joueurs_min = models.IntegerField(validators=[valider_positif])
     joueurs_max = models.IntegerField(validators=[valider_positif])
     id_editeur = models.ForeignKey(Editeur, models.DO_NOTHING, db_column='id_editeur')
+    
+    def clean(self):
+        super().clean()
+        if self.joueurs_min > self.joueurs_max:
+            raise ValidationError("Joueurs min inférieur à joueurs max.")
+        
+    def save(self, *args, **kwargs):
+        self.clean()
+        super().save(*args, **kwargs)
     
 
     class Meta:
