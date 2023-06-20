@@ -15,6 +15,7 @@ class ModelTests(TestCase):
     def test_editeur_creation(self):
         self.assertEqual(Editeur.objects.count(), 1)
 
+
     #test longueur nom editeur
     def test_editeur_nom_length(self):
         editeur = Editeur(nom_editeur='a' * 51) # test avec nom de 51 charactere
@@ -104,7 +105,7 @@ class JeuCrudTests(TestCase):
             'joueurs_max': 4,
             'id_editeur': self.editeur.id_editeur  # Assuming there is an Editeur instance with primary key 1
         }
-        response = self.client.post("/api/JeuViewset/", data, format='json')
+        response = self.client.post(self.list_url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Jeu.objects.count(), 1)
         jeu = Jeu.objects.get(pk=1)
