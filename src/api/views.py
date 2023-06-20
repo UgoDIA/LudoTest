@@ -12,3 +12,8 @@ class JeuViewset(viewsets.ModelViewSet):
 class EditeurViewset(viewsets.ModelViewSet):
     queryset = Editeur.objects.all()
     serializer_class = EditeurSerializer
+    
+class JoinedViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = JoinedSerializer
+    queryset = Jeu.objects.select_related('id_editeur').all()  
+
