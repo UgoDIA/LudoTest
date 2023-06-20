@@ -63,7 +63,7 @@ class ModelTests(TestCase):
         self.assertEqual(str(context.exception), "{'__all__': ['Joueurs min inférieur à joueurs max.']}")
 
     #test joueurs min negatif
-    def test_joueurs_min_negative(self):
+    def test_joueurs_min_negatif(self):
         jeu = Jeu(
             nom_jeu='Test Game',
             date_publication=date.today(),
@@ -76,7 +76,7 @@ class ModelTests(TestCase):
             jeu.full_clean()
 
     #test joueurs max negatif
-    def test_joueurs_max_negative(self):
+    def test_joueurs_max_negatif(self):
         jeu = Jeu(
             nom_jeu='Test Game',
             date_publication=date.today(),
@@ -88,6 +88,8 @@ class ModelTests(TestCase):
         with self.assertRaises(ValidationError):
             jeu.full_clean()
 
+
+
 #Test des opérations CRUD
 class JeuCrudTests(TestCase):
     def setUp(self):
@@ -97,6 +99,7 @@ class JeuCrudTests(TestCase):
         
     #test post   
     def test_create_jeu(self):
+
         data = {
             'nom_jeu': 'Test Jeu',
             'date_publication': '2023-01-01',
